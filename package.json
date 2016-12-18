@@ -1,0 +1,25 @@
+{
+  "name": "JiKancolle",
+  "version": "0.1.0",
+  "description": "VoHiYo",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js",
+    "pack": "build --dir",
+    "dist": "build"
+  },
+  "author": "Muazam Kamal <muazam.kamal@gmail.com> (http://muazamkamal.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^1.4.12",
+    "electron-builder": "^10.8.1",
+    "electron-packager": "^8.4.0",
+    "electron-prebuilt": "^1.4.12"
+  },
+  "build": {
+    "appId": "JiKancolle",
+    "win": {
+      "iconUrl": "./icon/temp.ico"
+    }
+  }
+}

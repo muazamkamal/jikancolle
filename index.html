@@ -7,8 +7,13 @@
   </head>
   <body align=center>
     <h1>JiKancolle</h1>
-    <p>Click the button below for one random Kaga voice line out of 23.</p>
-    <p id=test></p>
+    <select id="menu">
+      <option value="Haruna" selected="selected">Haruna</option>
+      <option value="Warspite">Warspite</option>
+      <option value="Amatsukaze">Amatsukaze</option>
+    </select>
+    <p>Click the button below for one random <span id=va></span> voice line out of 23.</p>
+    <p><button id="testbutton"></button></p>
     <p class=jsValue></p>
     <script>require('./index.js')</script>
   </body>

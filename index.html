@@ -5,16 +5,17 @@
     <link rel="stylesheet" href="./styles.css">
     <title>JiKancolle</title>
   </head>
-  <body align=center>
+  <body align="center">
     <h1>JiKancolle</h1>
     <select id="menu">
       <option value="Haruna" selected="selected">Haruna</option>
       <option value="Warspite">Warspite</option>
       <option value="Amatsukaze">Amatsukaze</option>
     </select>
-    <p>Click the button below for one random <span id=va></span> voice line out of 23.</p>
+    <p>Click the button below for one random <span id="va"></span> voice line out of 23.</p>
+    <input id="vol" type="range" min="0" max="100" step="1" value="30"/>  <span id="volvalue"></span>
     <p><button id="testbutton"></button></p>
-    <p class=jsValue></p>
-    <script>require('./index.js')</script>
+    <p class="jsValue"></p>
+    <script>require("./index.js")</script>
   </body>
 </html>

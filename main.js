@@ -31,15 +31,13 @@ app.on('ready', () => {
   })
 
   var contextMenu = Menu.buildFromTemplate([
-
-          { label: 'Show App', click:  function(){
-              win.show();
-          } },
-          { label: 'Quit', click:  function(){
-              app.isQuiting = true;
-              app.quit();
-
-          } }
+    {label: 'Show App', click:  function(){
+      win.show();
+    }},
+    {label: 'Quit', click:  function(){
+      app.isQuiting = true;
+      app.quit();
+    }}
   ])
 
   tray.setToolTip('JiKancolle')

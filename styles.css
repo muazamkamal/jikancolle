@@ -1,3 +1,4 @@
+
 body {
   background-color: rgba(0,0,0,0.7);
   font-family: Calibri;
@@ -30,4 +31,34 @@ body {
   cursor: pointer;
   border-radius: 10px;
   font-family: Calibri;
+}
+
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 150px; /* Specific width is required for Firefox. */
+  height: 5px;
+  background: black; /* Otherwise white in Chrome */
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+  background: white;
+  border-radius: 5px;
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+
+  /* Hides the slider so custom styles can be added */
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
 }

@@ -6,8 +6,8 @@ let tray = null
 
 app.on('ready', () => {
   let win = new BrowserWindow({
-    width:600,
-    height: 250,
+    width: 600,
+    height: 310,
     icon: '/icon/temp.ico',
     autoHideMenuBar: true,
     title: "JiKancolle"

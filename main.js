@@ -7,7 +7,7 @@ let tray = null
 app.on('ready', () => {
   let win = new BrowserWindow({
     width: 600,
-    height: 310,
+    height: 350,
     icon: '/icon/temp.ico',
     autoHideMenuBar: true,
     title: "JiKancolle"
@@ -31,9 +31,6 @@ app.on('ready', () => {
   })
 
   var contextMenu = Menu.buildFromTemplate([
-    {label: 'Show App', click:  function(){
-      win.show();
-    }},
     {label: 'Quit', click:  function(){
       app.isQuiting = true;
       app.quit();

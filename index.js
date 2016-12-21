@@ -81,7 +81,7 @@ function updateTime(){
 
   if (minutes == 00 && seconds == 00 ) {
     audio.src = voice[hours]
-    audio.volume = 0.3
+    audio.volume = current_vol/100
     audio.play()
     //console.log(hours)
   }

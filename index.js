@@ -1,105 +1,142 @@
-const remote = require('electron').remote
-const main = remote.require('./main.js')
+const remote = require('electron').remote;
+const main = remote.require('./main.js');
+const settings = remote.require('electron-settings');
 
-var audio = new Audio()
+var audio = new Audio();
 
-let volume = document.getElementById('vol')
-volume.addEventListener('change', updateVOL)
+var volume = document.getElementById('vol');
 
-function updateVOL() {
-  current_vol = volume.value
-  document.getElementById('volvalue').innerHTML = current_vol
-}
+if (settings.get('volume') != undefined) {
+    current_vol = settings.get('volume');
+    document.getElementById('volvalue').innerHTML = settings.get('volume');
+    volume.value = settings.get('volume');
 
-updateVOL()
-
-let checkchange = document.getElementById('menu')
-checkchange.addEventListener('change', updateVA)
-
-function updateVA() {
-  var menu = document.getElementsByTagName('option')
+    var menu = document.getElementsByTagName('option');
     for (var j = 0; j < menu.length; j++) {
-      if (menu[j].selected == true) {
-        menuactive = menu[j].value
-    }
-  }
-
-  if (menuactive === 'Haruna') {
-    haruna = []
-    for (var k = 0; k <= 23; k++) {
-      if (k < 10) {
-        haruna[k] = './audio/haruna/Haruna-0' + k + '.ogg'
-      }
-      else {
-        haruna[k] = './audio/haruna/Haruna-' + k + '.ogg'
-      }
-    }
-    voice = haruna
-    //console.log("1")
-  }
-  else if (menuactive === 'Warspite') {
-    warspite = []
-    for (var k = 0; k <= 23; k++) {
-      if (k < 10) {
-        warspite[k] = './audio/warspite/Warspite-0' + k + '.ogg'
-      }
-      else {
-        warspite[k] = './audio/warspite/Warspite-' + k + '.ogg'
-      }
-    }
-    voice = warspite
-    //console.log("2")
-  }
-  else if (menuactive === 'Amatsukaze') {
-    amatsukaze = []
-    for (var k = 0; k <= 23; k++) {
-      if (k < 10) {
-        amatsukaze[k] = './audio/amatsukaze/Amatsukaze-0' + k + '.ogg'
-      }
-      else {
-        amatsukaze[k] = './audio/amatsukaze/Amatsukaze-' + k + '.ogg'
-      }
-    }
-    voice = amatsukaze
-    //console.log("3")
-  }
-
-  var $va = document.getElementById('va')
-  $va.innerHTML = menuactive
-
-  let testbutton = document.getElementById('testbutton')
-  testbutton.textContent = 'Random ' + menuactive + ' voice line'
+        if (menu[j].value === settings.get('VA')) {
+            menu[j].selected = true;
+        }
+        else {
+            menu[j].selected = false;
+        }
+    };
 }
+else {
+    current_vol = volume.value;
+    document.getElementById('volvalue').innerHTML = volume.value;
 
-updateVA()
 
-function updateTime(){
-  var currentTime = new Date()
-  var hours = currentTime.getHours()
-  var minutes = currentTime.getMinutes()
-  var seconds = currentTime.getSeconds()
+};
 
-  if (minutes == 00 && seconds == 00 ) {
-    audio.src = voice[hours]
-    audio.volume = current_vol/100
-    audio.play()
-    //console.log(hours)
-  }
-}
+volume.addEventListener('input', function(){
+    audio.volume = this.value/100;
+    current_vol = this.value;
+    audio.volume = current_vol/100;
+    settings.set('volume', current_vol)
+    document.getElementById('volvalue').innerHTML = this.value;
+});
 
-setInterval(updateTime, 1000)
+var toggle = document.getElementById('switch');
 
-var $jsValue = document.querySelector('.jsValue')
+var dndhr = null;
+var dndmin = null;
 
-testbutton.addEventListener('click', ( ) => {
-  var rand = Math.floor((Math.random() * 23) + 1)
-  audio.src = voice[rand]
-  audio.volume = current_vol/100
-  audio.play()
-  $jsValue.innerHTML = 'Playing ' + menuactive + ' line ' + rand
-  //console.log('Button pressed')
+toggle.addEventListener('change', function(){
+    // console.log(toggle.checked);
+    if (toggle.checked != false) {
+        dndNOW = new Date();
+        dndhr = dndNOW.getHours();
+        dndmin = dndNOW.getMinutes();
+    }
+    else {
+        dndhr = null;
+        dndmin = null;
+    }
+    // console.log(dndhr);
+    // console.log(dndmin);
 })
 
-audio.onended = function() {
-  $jsValue.innerHTML = ''
+var menuVA = document.getElementById('menu');
+menuVA.addEventListener('change', updateVA);
+
+function updateVA() {
+    var menu = document.getElementsByTagName('option');
+    for (var j = 0; j < menu.length; j++) {
+        if (menu[j].selected == true) {
+            activeVA = menu[j].value
+            settings.set('VA', activeVA)
+        }
+    };
+
+    voice = [];
+    for (var k = 0; k <= 23; k++) {
+        if (k < 10) {
+            voice[k] = './audio/' + activeVA.toLowerCase() + '/' + activeVA + '-0' + k + '.ogg';
+        }
+        else {
+            voice[k] = './audio/' + activeVA.toLowerCase() + '/' + activeVA + '-' + k + '.ogg';
+        }
+    };
+
+    audio.pause();
+
+    var $va = document.getElementById('va');
+    $va.innerHTML = activeVA;
+
+    var testbutton = document.getElementById('testbutton');
+    testbutton.textContent = 'Random ' + activeVA + ' voice line';
+};
+
+updateVA();
+
+function updateTime(){
+    var currentTime = new Date();
+    var hours = currentTime.getHours();
+    var minutes = currentTime.getMinutes();
+    var seconds = currentTime.getSeconds();
+
+    if (minutes == 00 && seconds == 00 ) {
+        if (dndmin != null && dndmin < 45) {
+            if (hours > dndhr + 1) {
+                audio.src = voice[hours];
+                audio.volume = current_vol/100;
+                audio.play();
+
+                toggle.checked = false;
+            };
+        }
+        else if (dndmin != null && dndmin >= 45) {
+                if (hours > dndhr + 2) {
+                    audio.src = voice[hours];
+                    audio.volume = current_vol/100;
+                    audio.play();
+                };
+        }
+        else {
+            audio.src = voice[hours];
+            audio.volume = current_vol/100;
+            audio.play();
+        };
+    };
+};
+
+var $info = document.querySelector('.info');
+
+testbutton.addEventListener('click', testplay)
+
+function testplay() {
+    var rand = Math.floor((Math.random() * 23) + 1);
+    audio.src = voice[rand];
+    audio.volume = current_vol/100;
+    audio.play();
+    $info.innerHTML = 'Playing ' + activeVA + ' line ' + rand;
+    // console.log('Test button pressed')
+    var a = 1;
+    var b = 2;
 }
+
+setInterval(updateTime, 1000);
+
+audio.onended = function() {
+    $info.innerHTML = '';
+};

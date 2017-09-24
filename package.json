@@ -1,25 +1,31 @@
 {
-  "name": "JiKancolle",
-  "version": "0.3.1",
-  "description": "VoHiYo",
+  "name": "jikancolle",
+  "version": "0.4.0",
+  "description": "Cute anime girls telling you the time every hour.",
   "main": "main.js",
-  "scripts": {
-    "start": "electron main.js",
-    "pack": "build --dir",
-    "dist": "build"
-  },
-  "author": "Muazam Kamal <muazam.kamal@gmail.com> (http://muazamkamal.com)",
-  "license": "MIT",
-  "devDependencies": {
-    "electron": "^1.4.12",
+  "dependencies": {
+    "electron": "^1.7.6",
     "electron-builder": "^10.8.1",
-    "electron-packager": "^8.4.0",
-    "electron-prebuilt": "^1.4.12"
+    "electron-settings": "^3.1.1",
+    "request": "^2.79.0"
   },
-  "build": {
-    "appId": "JiKancolle",
-    "win": {
-      "iconUrl": "./icon/temp.ico"
-    }
-  }
+  "devDependencies": {
+    "electron-packager": "^9.1.0"
+  },
+  "scripts": {
+    "start": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=icon/logo.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . --overwrite --asar --platform=win32 --arch=ia32 --icon=icon/logo.ico --prune=true --out=release-builds/unpacked --ignore=release-builds",
+    "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=icon/logo.png --prune=true --out=release-builds"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muazamkamal/jikancolle.git"
+  },
+  "author": "Muazam Kamal",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/muazamkamal/jikancolle/issues"
+  },
+  "homepage": "https://github.com/muazamkamal/jikancolle#readme"
 }

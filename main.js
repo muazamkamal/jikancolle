@@ -1,43 +1,57 @@
-const electron = require('electron')
-const {app, BrowserWindow, Menu, Tray} = electron
-const path = require('path')
+const electron = require('electron');
+const url = require('url');
+const path = require('path');
+const settings = require('electron-settings');
 
-let tray = null
+const {app, BrowserWindow, Menu, Tray} = electron;
 
-app.on('ready', () => {
-  let win = new BrowserWindow({
-    width: 600,
-    height: 350,
-    icon: '/icon/temp.ico',
-    autoHideMenuBar: true,
-    title: "JiKancolle"
-  })
+let win;
+let image;
 
-  win.loadURL(`file://${__dirname}/index.html`)
-  //win.webContents.openDevTools()
-  let image = path.join(__dirname, 'icon', 'temp.png')
-  tray = new Tray( image )
+app.on('ready', function(){
+    win = new BrowserWindow({
+        title: 'JiKancolle',
+        width: 600,
+        height: 350,
+        autoHideMenuBar: true,
+        resizable: false,
+        icon: path.join(__dirname, 'icon', 'logo.png')
+    });
 
-  tray.on('click', () => {
-    win.isVisible() ? win.hide() : win.show()
-  })
+    // win.webContents.openDevTools();
 
-  win.on('close', function(event){
-    if ( !app.isQuiting){
-      event.preventDefault()
-      win.hide()
-    }
+    // win.setMenu(null);
+
+    win.loadURL(url.format({
+        pathname: path.join(__dirname, 'index.html'),
+        protocol: 'file:',
+        slashes: true
+    }));
+
+
+
+    image = path.join(__dirname, 'icon', 'logo.png');
+    tray = new Tray(image);
+
+    tray.on('click', () => {
+        win.isVisible() ? win.hide() : win.show()
+    });
+
+    var contextMenu = Menu.buildFromTemplate([
+        {label: 'Quit', click: function(){
+            app.isQuiting = true;
+            app.quit();
+        }}
+    ]);
+
+    win.on('close', function(event){
+        if (!app.isQuiting){
+            event.preventDefault()
+            win.hide()
+        }
     return false
-  })
+    });
 
-  var contextMenu = Menu.buildFromTemplate([
-    {label: 'Quit', click:  function(){
-      app.isQuiting = true;
-      app.quit();
-    }}
-  ])
-
-  tray.setToolTip('JiKancolle')
-  tray.setContextMenu(contextMenu)
-
-})
+    tray.setToolTip('JiKancolle');
+    tray.setContextMenu(contextMenu);
+});

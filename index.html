@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="./styles.css">
-    <title>JiKancolle</title>
-  </head>
-  <body align="center">
-    <h1>JiKancolle</h1>
-    <select id="menu">
-      <option value="Haruna" selected="selected">Haruna</option>
-      <option value="Warspite">Warspite</option>
-      <option value="Amatsukaze">Amatsukaze</option>
-    </select>
-    <p>Click the button below for one random <span id="va"></span> voice line out of 23.</p>
-    <input id="vol" type="range" min="0" max="100" step="1" value="30"/>  <span id="volvalue"></span>
-    <p><button id="testbutton"></button></p>
-    <p class="jsValue"></p>
-    <script>require("./index.js")</script>
-  </body>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="styles.css"/>
+        <title>JiKancolle</title>
+    </head>
+    <body align="center">
+        <h1>JiKancolle</h1>
+        <select id="menu">
+            <option value="Haruna" selected="selected">Haruna</option>
+            <option value="Warspite">Warspite</option>
+            <option value="Amatsukaze">Amatsukaze</option>
+        </select>
+        <p>Click the button below for one random <span id="va"></span> voice line out of 24.</p>
+        <input id="vol" type="range" min="0" max="100" step="1" value="30"/>  <span id="volvalue"></span>
+        <!-- <input id="vol" type="range" min="0" max="100" step="1" oninput="updateVOL(this.value)" onchange="updateVOL(this.value)"></input> -->
+        <div class=testarea>
+            <p class="info"></p>
+            <p><button id="testbutton"></button></p>
+        </div>
+        <div class="toggle">
+            Do Not Disturb
+            <input type="checkbox" id="switch">
+            <label for="switch"></label>
+        </div>
+        <script>require("./index.js")</script>
+    </body>
 </html>

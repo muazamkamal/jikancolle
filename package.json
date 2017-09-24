@@ -14,9 +14,9 @@
   },
   "scripts": {
     "start": "electron .",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=icon/logo.icns --prune=true --out=release-builds",
-    "package-win": "electron-packager . --overwrite --asar --platform=win32 --arch=ia32 --icon=icon/logo.ico --prune=true --out=release-builds/unpacked --ignore=release-builds",
-    "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=icon/logo.png --prune=true --out=release-builds"
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=icon/logo.icns --prune=true --out=release-builds --app-copyright=\"Copyright (C) Muazam Kamal\"",
+    "package-win": "electron-packager . --overwrite --asar --platform=win32 --arch=ia32 --icon=icon/logo.ico --prune=true --out=release-builds/unpacked --ignore=release-builds --win32metadata.ProductName=\"JiKancolle\" --win32metadata.FileDescription=\"Cute anime girls telling you the time every hour.\" --win32metadata.OriginalFilename=\"JiKancolle\" --app-copyright=\"Copyright (C) 2017 Muazam Kamal\"",
+    "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=icon/logo.png --prune=true --out=release-builds --app-copyright=\"Copyright (C) Muazam Kamal\""
   },
   "repository": {
     "type": "git",

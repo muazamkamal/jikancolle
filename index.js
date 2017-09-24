@@ -94,7 +94,7 @@ function updateTime(){
     var hours = currentTime.getHours();
     var minutes = currentTime.getMinutes();
     var seconds = currentTime.getSeconds();
-
+    
     if (minutes == 00 && seconds == 00 ) {
         if (dndmin != null && dndmin < 45) {
             if (hours > dndhr + 1) {
@@ -103,6 +103,9 @@ function updateTime(){
                 audio.play();
 
                 toggle.checked = false;
+                dndhr = null;
+                dndmin = null;
+                // console.log('<45');
             };
         }
         else if (dndmin != null && dndmin >= 45) {
@@ -110,12 +113,19 @@ function updateTime(){
                     audio.src = voice[hours];
                     audio.volume = current_vol/100;
                     audio.play();
+
+                    toggle.checked = false;
+                    dndhr = null;
+                    dndmin = null;
+                    // console.log('>=45');
                 };
         }
         else {
             audio.src = voice[hours];
             audio.volume = current_vol/100;
             audio.play();
+
+            // console.log('usual');
         };
     };
 };
@@ -131,8 +141,6 @@ function testplay() {
     audio.play();
     $info.innerHTML = 'Playing ' + activeVA + ' line ' + rand;
     // console.log('Test button pressed')
-    var a = 1;
-    var b = 2;
 }
 
 setInterval(updateTime, 1000);

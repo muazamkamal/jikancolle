@@ -39,18 +39,18 @@ volume.addEventListener('input', function(){
 var toggle = document.getElementById('switch');
 
 var dndhr = null;
-var dndmin = null;
+// var dndmin = null;
 
 toggle.addEventListener('change', function(){
     // console.log(toggle.checked);
     if (toggle.checked != false) {
         dndNOW = new Date();
         dndhr = dndNOW.getHours();
-        dndmin = dndNOW.getMinutes();
+        // dndmin = dndNOW.getMinutes();
     }
     else {
         dndhr = null;
-        dndmin = null;
+        // dndmin = null;
     }
     // console.log(dndhr);
     // console.log(dndmin);
@@ -94,9 +94,10 @@ function updateTime(){
     var hours = currentTime.getHours();
     var minutes = currentTime.getMinutes();
     var seconds = currentTime.getSeconds();
-    
+
     if (minutes == 00 && seconds == 00 ) {
-        if (dndmin != null && dndmin < 45) {
+        // if (dndmin != null && dndmin < 45) {
+        if (dndhr != null) {
             if (hours > dndhr + 1) {
                 audio.src = voice[hours];
                 audio.volume = current_vol/100;
@@ -104,21 +105,21 @@ function updateTime(){
 
                 toggle.checked = false;
                 dndhr = null;
-                dndmin = null;
+                // dndmin = null;
                 // console.log('<45');
             };
-        }
-        else if (dndmin != null && dndmin >= 45) {
-                if (hours > dndhr + 2) {
-                    audio.src = voice[hours];
-                    audio.volume = current_vol/100;
-                    audio.play();
-
-                    toggle.checked = false;
-                    dndhr = null;
-                    dndmin = null;
-                    // console.log('>=45');
-                };
+        // }
+        // else if (dndmin != null && dndmin >= 45) {
+        //     if (hours > dndhr + 2) {
+        //         audio.src = voice[hours];
+        //         audio.volume = current_vol/100;
+        //         audio.play();
+        //
+        //         toggle.checked = false;
+        //         dndhr = null;
+        //         dndmin = null;
+        //         // console.log('>=45');
+        //     };
         }
         else {
             audio.src = voice[hours];

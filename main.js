@@ -18,7 +18,7 @@ app.on('ready', function(){
         icon: path.join(__dirname, 'icon', 'logo.png')
     });
 
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
 
     // win.setMenu(null);
 

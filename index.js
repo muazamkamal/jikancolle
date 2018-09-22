@@ -106,7 +106,7 @@ function updateTime(){
                 toggle.checked = false;
                 dndhr = null;
                 // dndmin = null;
-                // console.log('<45');
+                console.log('DND');
             };
         // }
         // else if (dndmin != null && dndmin >= 45) {
@@ -126,7 +126,7 @@ function updateTime(){
             audio.volume = current_vol/100;
             audio.play();
 
-            // console.log('usual');
+            console.log('usual');
         };
     };
 };

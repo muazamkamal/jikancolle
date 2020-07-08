@@ -11,7 +11,7 @@
   "author": "Muazam Kamal <muazam.kamal@gmail.com> (http://muazamkamal.com)",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^1.4.12",
+    "electron": "^9.1.0",
     "electron-builder": "^10.8.1",
     "electron-packager": "^8.4.0",
     "electron-prebuilt": "^1.4.12"
